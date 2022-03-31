@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Show Ingredient</title>
+</head>
+<body>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="pannel-group">
+                <div class="panel panel-primary">
+                    <!--/*@thymesVar id="ingredient" type="com.example.recipeproject.domain.Ingredient"*/-->
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p th:text="${ingredient.description}">Ingredient Description Here!</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <p th:text="'Amount: ' +  ${(ingredient.amount)} + ' ' + ${ingredient.uom.description}">
+                                        amount</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

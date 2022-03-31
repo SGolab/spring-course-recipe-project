@@ -1,6 +1,7 @@
 package com.example.recipeproject.domain;
 
 import lombok.*;
+import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = "recipe")
+@ToString(exclude = "recipe")
 @Entity
 public class Ingredient {
 
