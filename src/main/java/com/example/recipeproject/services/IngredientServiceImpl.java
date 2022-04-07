@@ -48,10 +48,11 @@ public class IngredientServiceImpl implements IngredientService {
 
         if (ingredientCommandOptional.isEmpty()) {
             log.error("Ingredient id not found: " + ingredientId);
-            throw new IllegalStateException("Ingredient id not found: " + ingredientId); //todo
+//            throw new IllegalStateException("Ingredient id not found: " + ingredientId);
+            //todo
         }
 
-        return ingredientCommandOptional.get();
+        return ingredientCommandOptional.orElse(null);
     }
 
     @Override
@@ -104,9 +105,40 @@ public class IngredientServiceImpl implements IngredientService {
                         .findFirst();
             }
 
-
             //todo check for fail
             return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
+        }
+    }
+
+    @Override
+    public void deleteByRecipeIdAndIngredientId(long recipeId, long ingredientId) {
+
+        Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
+
+        if (recipeOptional.isEmpty()) {
+            //todo toss error if not found
+            log.error(("Recipe not found for id: " + recipeId));
+//            throw new IllegalStateException(("Recipe not found for id: " + recipeId));
+        } else {
+
+            Recipe recipe = recipeOptional.get();
+
+            Optional<Ingredient> ingredientOptional = recipe
+                    .getIngredients()
+                    .stream()
+                    .filter(ingredient -> ingredient.getId().equals(ingredientId))
+                    .findFirst();
+
+            if (ingredientOptional.isPresent()) {
+                Ingredient ingredientToDelete = ingredientOptional.get();
+                ingredientToDelete.setRecipe(null);
+                recipe.getIngredients().remove(ingredientOptional.get());
+            } else {
+                //todo toss error if not found
+                log.error(("Ingredient not found for id: " + ingredientId + " for recipe id: " + recipeId));
+//                throw new IllegalStateException(("Ingredient not found for id: " + ingredientId + " for recipe id: " + recipeId));
+            }
+            recipeRepository.save(recipe);
         }
     }
 }
