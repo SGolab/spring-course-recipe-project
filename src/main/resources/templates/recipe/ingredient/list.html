@@ -13,6 +13,9 @@
                 <div class="panel-heading">
                     <h1 class="panel-title">Ingredients!</h1>
                 </div>
+
+                <a th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/new'}">Add New Ingredient</a>
+
                 <div class="panel-body">
                     <div class="table-responsive" th:if="${not #lists.isEmpty(recipe.ingredients)}">
                         <table class="table table-hover ">

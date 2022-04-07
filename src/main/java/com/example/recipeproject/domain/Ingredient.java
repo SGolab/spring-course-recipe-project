@@ -9,9 +9,8 @@ import java.math.BigDecimal;
 /**
  * Created by jt on 6/13/17.
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 @EqualsAndHashCode(exclude = "recipe")
 @ToString(exclude = "recipe")
 @Entity
@@ -33,5 +32,9 @@ public class Ingredient {
         this.description = description;
         this.amount = amount;
         this.uom = uom;
+    }
+
+    public Ingredient() {
+
     }
 }
