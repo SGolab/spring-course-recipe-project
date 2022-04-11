@@ -28,6 +28,9 @@
                         <!--/*@thymesVar id="recipe" type="com.example.recipeproject.domain.Recipe"*/-->
                         <h1 class="panel-title" th:text="${recipe.description}">Recipe Description Here!</h1>
                     </div>
+
+                    <a th:href="@{'/recipe/' + ${recipe.id} + '/image'}">Change image</a>
+
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-3">
