@@ -106,4 +106,13 @@ public class RecipeControllerTest {
 
         verify(recipeService, times(1)).deleteById(anyLong());
     }
+
+    @Test
+    public void findByIdInvalidIdFormat() throws Exception {
+
+        mockMvc.perform(get("/recipe/notANumber/show"))
+                .andExpect(status().isBadRequest())
+                .andExpect(model().attributeExists("exception"))
+                .andExpect(view().name("400badrequest"));
+    }
 }
